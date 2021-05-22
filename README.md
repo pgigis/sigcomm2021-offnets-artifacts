@@ -30,7 +30,7 @@ sudo apt-get install python3-pip
 ```
 
 In order to isolate the following installation and runs from other parts of the system, we can run everything in a python3 venv environment. This can be done according to the instructions on the
-[python3 venv tutorial](https://docs.python.org/3/tutorial/venv.html)
+[python3 venv tutorial](https://docs.python.org/3/tutorial/venv.html).
 
 Please follow the aforementioned guide to set up such an environment on your system.
 
@@ -60,7 +60,7 @@ Currently, the following two input datasets are supported:
 2) Rapid7 Certificates
 
 ```
-python extract_ee_certificates.py
+python3 extract_ee_certs.py
 
 ```
 
@@ -74,7 +74,7 @@ This will generate, a single JSON line-by-line file. Each line contains a JSON o
 
 The script takes as an input the generated file from step 1 and the hypergiant keyword (e.g., google).
 ```
-extract_hypergiant_on-net_certs.py
+python3 extract_hypergiant_on-net_certs.py
 ```
 
 This will generate, a single JSON line-by-line file that includes only the *dns_names* and *subject:organization* fields of the EE certificates found in IP addresses of the HG AS(es). Each line contains a JSON object with the following format:
@@ -89,7 +89,7 @@ This will generate, a single JSON line-by-line file that includes only the *dns_
 
 Takes as an input the Hypergiant keyword
 ```
-extract_hypergiant_off-net_certs.py
+python3 extract_hypergiant_off-net_certs.py
 ```
 
 This will generate, a single JSON line-by-line file that includes only the *dns_names* and *subject:organization* fields of the EE certificates found in IP addresses of the HG AS(es). Each line contains a JSON object with the following format:
@@ -107,5 +107,5 @@ This will generate, a single JSON line-by-line file that includes only the *dns_
 **Step 5**: Compare TLS/SSL certificates inferences with HTTP(s) headers.
 
 ```
-compare_cert_headers.py
+python3 compare_cert_headers.py
 ```
