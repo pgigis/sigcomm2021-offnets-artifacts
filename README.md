@@ -3,9 +3,10 @@
 
 Getting Acccess to the Datasets:
 
+
 The main dataset (e.g. TLS/SSL certificates, HTTP(s) headers) of the paper is provided by Rapid7. 
 
-To access the historical dataset you have to apply in rapid7 for an account. Data access is free to Practitioners, Academics, and Researchers.
+To access the historical dataset you have to apply for an account. Data access is free to Practitioners, Academics, and Researchers.
 
 To create an account to the Rapid7 Opendata platform visit:
 https://opendata.rapid7.com/sonar.ssl/
@@ -16,6 +17,9 @@ To fully reproduce our findings, you will need gain access to the following data
 * More SSL Certificates (non-443)
 * HTTP GET Responses
 * HTTPS GET Responses
+
+
+
 
 ### Prerequisites and Installation
 The entire software was written in python3, which has to be pre-installed on your system.
@@ -39,40 +43,69 @@ In case a required dependency is missing please contact [p.gkigkis at cs.ucl.ac.
 
 ### Analysis
 
-**Step 1**: Extract valid certificates.
+**Step 0**:
+```
+cd analysis
+```
 
-In this step, the script takes as an input the certificate dataset and excludes expired, self-signed and ce non-trusted chain.
 
-The script supports the following input datasets.
+**Step 1**: Extract End-Entity (EE) certificates.
 
-Two inputs:
+In this step, the script takes as an input the certificate dataset and extracts the EE certificates.
+The script excludes expired, self-signed and root/intermediate certificates that are not present in the CCADB [Common CA Database](https://www.ccadb.org).
+
+Currently, the following two input datasets are supported:
 
 1) Active Scan
 2) Rapid7 Certificates
 
-This will generate, a single JSON line-by-line file. Each line contains a JSON object
-with the following format:
+```
+python extract_ee_certificates.py
+
+```
+
+This will generate, a single JSON line-by-line file. Each line contains a JSON object with the following format:
 
 ```
 { "ip" : "EndEntity-Certificate" }
 ```
 
-**Step 2**: Extract hypergiant.
+**Step 2**: Process hypergiant on-net certificates.
 
 The script takes as an input the generated file from step 1 and the hypergiant keyword (e.g., google).
+```
+extract_hypergiant_on-net_certs.py
+```
 
-This will generate, a file with all hypergiant certificates founds in on-net IP addresses.
+This will generate, a single JSON line-by-line file that includes only the *dns_names* and *subject:organization* fields of the EE certificates found in IP addresses of the HG AS(es). Each line contains a JSON object with the following format:
 
 
-**Step 3**:
-Search in the off-nets for IPs with certificates of the HG
+```
+{ "ip" : { "ASN" : IntegerValue, "dns_names" : [ StringValue, ], "subject:organization" : StringValue } }
+```
+
+
+**Step 3**: Find hypergiant certificates in off-nets. 
 
 Takes as an input the Hypergiant keyword
+```
+extract_hypergiant_off-net_certs.py
+```
+
+This will generate, a single JSON line-by-line file that includes only the *dns_names* and *subject:organization* fields of the EE certificates found in IP addresses of the HG AS(es). Each line contains a JSON object with the following format:
+
+
+```
+{ "ip" : { "ASN" : IntegerValue, "dns_names" : [ StringValue, ], "subject:organization" : StringValue } }
+```
 
 
 **Step 4**: Process HTTP and HTTPs.
 
 
+
 **Step 5**: Compare TLS/SSL certificates inferences with HTTP(s) headers.
 
-
+```
+compare_cert_headers.py
+```
