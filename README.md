@@ -17,6 +17,24 @@ To fully reproduce our findings, you will need gain access to the following data
 * HTTP GET Responses
 * HTTPS GET Responses
 
+### Prerequisites and Installation
+The entire software was written in python3, which has to be pre-installed on your system.
+
+Install pip3:
+```
+sudo apt-get install python3-pip
+```
+
+In order to isolate the following installation and runs from other parts of the system, we can run everything in a python3 venv environment. This can be done according to the instructions on the
+[python3 venv tutorial](https://docs.python.org/3/tutorial/venv.html)
+
+Please follow the aforementioned guide to set up such an environment on your system.
+
+Then, install the required python3 packages within the venv:
+```
+pip3 install -r requirements.txt
+```
+In case a required dependency is missing please contact [p.gkigkis at cs.ucl.ac.uk]().
 
 
 ### Analysis
