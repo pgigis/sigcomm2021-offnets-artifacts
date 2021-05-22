@@ -17,3 +17,44 @@ To fully reproduce our findings, you will need gain access to the following data
 * HTTP GET Responses
 * HTTPS GET Responses
 
+
+
+### Analysis
+
+**Step 1**: Extract valid certificates.
+
+In this step, the script takes as an input the certificate dataset and excludes expired, self-signed and ce non-trusted chain.
+
+The script supports the following input datasets.
+
+Two inputs:
+
+1) Active Scan
+2) Rapid7 Certificates
+
+This will generate, a single JSON line-by-line file. Each line contains a JSON object
+with the following format:
+
+```
+{ "ip" : "EndEntity-Certificate" }
+```
+
+**Step 2**: Extract hypergiant.
+
+The script takes as an input the generated file from step 1 and the hypergiant keyword (e.g., google).
+
+This will generate, a file with all hypergiant certificates founds in on-net IP addresses.
+
+
+**Step 3**:
+Search in the off-nets for IPs with certificates of the HG
+
+Takes as an input the Hypergiant keyword
+
+
+**Step 4**: Process HTTP and HTTPs.
+
+
+**Step 5**: Compare TLS/SSL certificates inferences with HTTP(s) headers.
+
+
