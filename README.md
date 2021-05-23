@@ -48,7 +48,6 @@ In case a required dependency is missing please contact [p.gkigkis at cs.ucl.ac.
 cd analysis
 ```
 
-
 **Step 1**: Extract End-Entity (EE) certificates.
 
 In this step, the script takes as an input the certificate dataset and extracts the EE certificates.
@@ -61,7 +60,6 @@ Currently, the following two input datasets are supported:
 
 ```
 python3 extract_ee_certs.py
-
 ```
 
 This will generate, a single JSON line-by-line file. Each line contains a JSON object with the following format:
