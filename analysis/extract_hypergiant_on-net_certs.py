@@ -4,86 +4,33 @@ import pprint
 import argparse
 import pytricia
 
-
-# Load the IP-to-AS mapping file
-def load_ip_to_as_mapping(filename):
-	pyt = pytricia.PyTricia()
-	with open(filename, 'rt') as f:
-		data = json.load(f)
-	for prefix in data:
-		pyt[prefix] = data[prefix]
-	return pyt
+from lib.helpers import load_ip_to_as_mapping, createPath, load_config_file, load_hypergiant_ases
 
 
-def load_hypergiant_ases(date, folderPath="../datasets/hypergiants/"):
-	month, year = date.split('-')
-	hg_asn_to_hg_keyword = dict()
-	hg_keywords_available = set()
-	filePath = folderPath + year + "_" + month + "_hypergiants_asns.json"
-	try: 
-		with open(filePath, 'rt') as f:
-			data = json.load(f)
-			for hypergiant in data:
-				for AS in data[hypergiant]['asns']:
-					hg_asn_to_hg_keyword[int(AS)] = hypergiant
-					hg_keywords_available.add(hypergiant)
-	except:
-		print("Couldn't load \"{}\".".format(filePath))
-		exit()
-	return hg_asn_to_hg_keyword, hg_keywords_available
-
-
-def load_config_file(configFile):
-	hg_keyword_to_ases_key = dict()
-	try:
-		with open(configFile, 'rt') as f:
-			for line in f:
-				data = json.loads(line.rstrip())
-				hg_keyword_to_ases_key[data['hypergiant-keyword']] = data['hypergiant-ases-key']
-	except:
-		print("Couldn't load/process config file \"{}\"".format(configFile))
-		exit()
-	return hg_keyword_to_ases_key
-
-
-def proces_configuration_file(configuration_input, hg_asn_to_hg_keyword, hg_keywords_available):
-	# Check if for all keywords, a hypergiant-ases-key exist.
-	invalid = False
-	for hg_key in hg_asn_to_hg_keyword:
-		if hg_asn_to_hg_keyword[hg_key] not in hg_keywords_available:
-			print("hypergiant-ases-key \"{}\" not found.".format(hg_asn_to_hg_keyword[hg_key]))
-			invalid = True
-
-	if invalid == True:
-		print("Available \"hypergiant-ases-key\" keys:\n{}".format(hg_keywords_available))
-		exit() 
-
-	hg_asn_to_hg_keywords = dict()
-	all_hg_keywords = set()
+def process_configuration_file(configuration_input, hg_ases):
+	# Check if for all keywords, a hypergiant-ases-key in the hypergiant ASes file.
+	for input_ in configuration_input:	
+		if configuration_input[input_] not in hg_ases:
+			print("-> hypergiant-ases-key \"{}\" not found.".format(configuration_input[input_] ))
+			print("Available \"hypergiant-ases-key\" keys:\n{}".format(list(hg_ases.keys())))
+			return None
 	
-	for hg_asn in hg_asn_to_hg_keyword:
-		for keyword in configuration_input:
-			if hg_asn_to_hg_keyword[hg_asn] == configuration_input[keyword]:
-				if hg_asn not in hg_asn_to_hg_keywords:
-					hg_asn_to_hg_keywords[hg_asn] = set()
-				hg_asn_to_hg_keywords[hg_asn].add(keyword)
-				all_hg_keywords.add(keyword)
+	hg_asn_to_hg_keywords = dict()		
+	for hg_keyword in configuration_input:
+		for ASN in hg_ases[configuration_input[hg_keyword]]:
+			if ASN not in hg_asn_to_hg_keywords:
+				hg_asn_to_hg_keywords[ASN] = set()
+			hg_asn_to_hg_keywords[ASN].add(hg_keyword)
 	
-	return hg_asn_to_hg_keywords, all_hg_keywords
+	return hg_asn_to_hg_keywords
 
 
-def createFilePaths(filePathToStoreResults):
-	if not os.path.exists(filePathToStoreResults):
-		os.makedirs(filePathToStoreResults)
-
-
-def process_ee_certs(inputFile, ip_to_as, hg_asn_to_hg_keywords, all_hg_keywords, filePathToStoreResults):
+def process_ee_certs(inputFile, ip_to_as, hg_asn_to_hg_keywords, filePathToStoreResults):
 	openFiles_l = dict()
-
-	for hg_keyword in all_hg_keywords:
+	hg_keywords_l = {v for v_list in hg_asn_to_hg_keywords.values() for v in v_list}
+	for hg_keyword in hg_keywords_l:
 		filePath = filePathToStoreResults + hg_keyword + ".txt"
 		openFiles_l[hg_keyword] = open(filePath, 'wt')
-
 
 	with open(inputFile, 'rt') as f:
 		for line in f:
@@ -129,13 +76,14 @@ def process_ee_certs(inputFile, ip_to_as, hg_asn_to_hg_keywords, all_hg_keywords
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Process hypergiant on-net certificates.')
-	parser.add_argument('-d', '--date',
-						help='Date of snapshot to parse. Date format: YYYY-MM',
+	
+	parser.add_argument('-s', '--hypergiantASesFile',
+						help='The path of the hypergiant ASes file.',
 						type=str,
 						required=True)
 	parser.add_argument('-i', '--inputFile',
 						type=str,
-						help="The path to the input certificate.",
+						help="The path of the input certificates.",
 						required=True)
 	parser.add_argument('-c', '--configFile',
 						type=str,
@@ -148,16 +96,28 @@ if __name__ == '__main__':
 
 	args = parser.parse_args()
 
+	# Create on-nets folder
 	filePathToStoreResults = "/".join(args.inputFile.split("/")[:-1]) + "/on-nets/"
-	createFilePaths(filePathToStoreResults)
+	createPath(filePathToStoreResults)
 
+	# Load the IP-to-AS mapping
 	ip_to_as = load_ip_to_as_mapping(args.ipToASFile)
 
-	hg_asn_to_hg_keyword, hg_keywords_available = load_hypergiant_ases(args.date)
-	configuration_input = load_config_file(args.configFile)
+	# Load the Hypergiant ASes
+	hg_ases = load_hypergiant_ases(args.hypergiantASesFile)
+	if hg_ases is None:
+		exit()
 
-	hg_asn_to_hg_keywords, all_hg_keywords = proces_configuration_file(configuration_input, hg_asn_to_hg_keyword, hg_keywords_available)
+	# Load the config file
+	configuration_input = load_config_file(args.configFile)
+	if configuration_input is None:
+		exit()
+
+	# Check if config file is valid and return a map between HG ASes and HG keywords
+	hg_asn_to_hg_keywords = process_configuration_file(configuration_input, hg_ases)
+	if hg_asn_to_hg_keywords is None:
+		exit()
 	
-	process_ee_certs(args.inputFile, ip_to_as, hg_asn_to_hg_keywords, all_hg_keywords, filePathToStoreResults)
+	process_ee_certs(args.inputFile, ip_to_as, hg_asn_to_hg_keywords, filePathToStoreResults)
 
 

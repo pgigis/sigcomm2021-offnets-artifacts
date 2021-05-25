@@ -82,14 +82,14 @@ The complete list of available hypergiant-ases is the following:
 
 
 ```
-python3 extract_hypergiant_on-net_certs.py
+python3 extract_hypergiant_on-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json  -i results/active_21-11-2019/all_ee_certs.txt  -c config.json -a ../datasets/ip_to_as/2019_11_25thres_db.json
 ```
 
 This will generate, a single JSON line-by-line file that includes only the *dns_names* and *subject:organization* fields of the EE certificates found in IP addresses of the HG AS(es). Each line contains a JSON object with the following format:
 
 
 ```
-{ "ip" : StringValue,  "ASN" : IntegerValue, "dns_names" : [ StringValue, ], "subject:organization" : StringValue }
+{ "ip" : StringValue, "ASN" : IntegerValue, "dns_names" : [ StringValue, ], "subject:organization" : StringValue }
 ```
 
 
@@ -104,11 +104,13 @@ This will generate, a single JSON line-by-line file that includes only the *dns_
 
 
 ```
-{ "ip" : { "ASN" : IntegerValue, "dns_names" : [ StringValue, ], "subject:organization" : StringValue } }
+{ "ip" : StringValue, "ASN" : IntegerValue, "dns_names" : [ StringValue, ], "subject:organization" : StringValue }
 ```
 
 
 **Step 4**: Process HTTP and HTTPs.
+
+
 
 
 

@@ -7,10 +7,11 @@ import binascii
 import datetime
 
 from datetime import timezone
+from lib.helpers import createPath
 
 week = 60*60*24*7
 
-
+# Load the active scan dataset
 def load_active_scan_files(folderPath):
 	files_l = list()
 	folders = os.listdir(folderPath)
@@ -105,11 +106,6 @@ def load_ccadb_hashes(filePath="../datasets/certificates/validation/cert_hashes_
 	return ccadb_hashes
 
 
-def createFilePaths(resultPath):
-	if not os.path.exists(resultPath):
-		os.makedirs(resultPath)
-
-
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Extract End-Entity (EE) certificates.')
 	parser.add_argument('-d', '--date',
@@ -129,7 +125,7 @@ if __name__ == '__main__':
 	args = parser.parse_args()
 
 	resultPath = "results/" + args.dataType + "_" + args.date 
-	createFilePaths(resultPath)
+	createPath(resultPath)
 
 	ccadb_hashes = load_ccadb_hashes()
 	snapshot_timestamp  = datetime.datetime.strptime(args.date, '%d-%m-%Y').replace(tzinfo=timezone.utc).timestamp()
