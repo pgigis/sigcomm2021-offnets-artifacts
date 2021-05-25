@@ -50,10 +50,10 @@ To fully reproduce our findings, you will need to gain access to the following d
 * HTTP GET Responses
 * HTTPS GET Responses
 
-We provide a detailed documentation, on how to download and process the Rapid7 dataset here.
+We provide a detailed documentation, on how to download and process the Rapid7 dataset [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/tree/readme/datasets).
 
 Except the Rapid7 certificates we also used TLS certificate data derived from an active scan that we conducted in Nov. 2019
-but also data derived from the [Censys](https://censys.io/) platflorm. You can read more on how to obtain Research access to the Censys platform [here](https://support.censys.io/hc/en-us/articles/360038761891-Research-Access-to-Censys-Data).
+but also from the [Censys](https://censys.io/) platflorm. You can read more on how to obtain Research access to the Censys platform [here](https://support.censys.io/hc/en-us/articles/360038761891-Research-Access-to-Censys-Data).
 
 
 ## Analysis
