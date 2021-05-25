@@ -53,7 +53,7 @@ but also data derived from the [Censys](https://censys.io/) platflorm. You can r
 
 
 ## Analysis
-For the analysis part, we suggest you to populate the ```datasets``` folder of this repo, following these instructions.
+For the analysis part, we suggest you to populate the ```datasets``` folder of this repo, following these [instructions](https://github.com/pgigis/sigcomm2021-offnets-artifacts/tree/readme/datasets).
 The next steps suffice to infer the off-nets of the considered Hypergiants in this study. We will include more analysis commands that are available in the software at a later stage.
 
 
