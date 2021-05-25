@@ -69,7 +69,7 @@ Expired, self-signed and root/intermediate certificates that are not present in 
 
 Currently, as an input we support the following two datasets:
 
-1) Active Scan (Certigo) *Suggested*
+1) Active Scan (Certigo) - *Suggested*
 2) Rapid7 TLS scans 
 
 To run the script, execute the following command:
