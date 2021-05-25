@@ -98,7 +98,7 @@ def process_active_data(files, ccadb_hashes, snapshot_timestamp, resultPath):
 	fileToWrite.close()
 
 
-def load_ccadb_hashes(filePath="../datasets/certificates/validation/cert_hashes_ccadb.txt"):
+def load_ccadb_hashes(filePath="../datasets/tls_scans/ccadb/cert_hashes_ccadb.txt"):
 	ccadb_hashes = dict()
 	with open(filePath, 'rt') as f:
 		for line in f:
