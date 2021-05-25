@@ -4,10 +4,6 @@ Due to the size of the datasets, we provide [here](https://liveuclac-my.sharepoi
 
 For our longitudinal analysis, we used TLS certificate scans and HTTP(S) headers, derived from the [Rapid7 - Open Data](https://opendata.rapid7.com) platform.
 
-## Rapid7 Datasets
-
-### Download data
-
 To access the historical datasets of Rapid7 Open Data platform you need to apply for an account.
 ```Data access is free to Practitioners, Academics, and Researchers.```
 
@@ -21,12 +17,7 @@ To fully reproduce our findings, you will need to gain access to the following d
 * HTTP GET Responses
 * HTTPS GET Responses
 
-We provide a detailed documentation, on how to download and process the Rapid7 dataset [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/tree/readme/datasets).
-
-Except the Rapid7 certificates we also used TLS certificate data derived from an active scan that we conducted in Nov. 2019
-but also from the [Censys](https://censys.io/) platflorm. You can read more on how to obtain Research access to the Censys platform [here](https://support.censys.io/hc/en-us/articles/360038761891-Research-Access-to-Censys-Data).
-
-## How to download a file from Rapid7 Open Data platform
+### How to download a file from Rapid7 Open Data platform
 At first you need to an acount and create an API key.
 
 After this, using the following command you can request a download link from Rapid7. (Note: The link is only valid for a few hours.)
@@ -43,7 +34,12 @@ curl -L -o 2019-11-18-1574121404-http_get_80.json.gz -C - https://f002.backblaze
 The official Rapid7 Open Data API help is [here](https://opendata.rapid7.com/apihelp/).
 
 
-### TLS/SSL scans
+## TLS/SSL scans
+
+Except the Rapid7 certificates we also used TLS certificate data derived from an active scan that we conducted in Nov. 2019
+but also from the [Censys](https://censys.io/) platflorm. You can read more on how to obtain Research access to the Censys platform [here](https://support.censys.io/hc/en-us/articles/360038761891-Research-Access-to-Censys-Data).
+
+
 
 The TLS/SSL scans that we used in our longitudinal analysis can be found [here](https://opendata.rapid7.com/sonar.ssl/). In our study we used HTTPS GET requests on port-443. More specifically, in our analysis we use the ```_hosts``` and ```_certs``` files.
 
