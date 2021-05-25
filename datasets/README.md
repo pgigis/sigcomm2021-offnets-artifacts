@@ -59,24 +59,24 @@ from `censys-io.ipv4_public.20191119` c inner join `censys-io.certificates_publi
 ```
 
 ### Active Scan (Certigo)
+Except from the passive TLS scanning datasets, we also conducted in Nov. 2019 an active scan using the [Certigo](https://github.com/square/certigo) tool.
 
+The active scan dataset can be found [here](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabpgk_ucl_ac_uk/Ekb_VbFdQghCntUHh98v-NoBdnSdS_XAh6859ME1RCLDpQ?e=jFeGnZ).
 
-Except the Rapid7 certificates we also used TLS certificate data derived from an active scan that we conducted in Nov. 2019
-but also from the [Censys](https://censys.io/) platflorm. 
+Please, copy the contents of the OneDrive folder in the ```tls_scans/active``` folder
+
 ### HTTP headers
 The HTTP GET Responses that we used in our analysis can be found [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/headers/http/http_80_filenames.txt).
 
 ### HTTPS headers
 The HTTPS GET Responses that we used in our analysis can be found [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/headers/https/https_443_filenames.txt).
 
-## Active Scan
-
 As we use a snapshot every three months (January, April, July, October), we alligned each dataset to the closest available date.
 
 ## IP-to-AS Mapping
 
-The IP-to-AS mappings that we used in this work can be [here](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabpgk_ucl_ac_uk/EujvVAp0lqBBpY-EgY5IZSgBLTgoxv7xwtRW92YGe9hDLA?e=2iSwLV).
+The IP-to-AS mappings that we used in this work can be found [here](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabpgk_ucl_ac_uk/EujvVAp0lqBBpY-EgY5IZSgBLTgoxv7xwtRW92YGe9hDLA?e=2iSwLV).
 
-Please copy the contents of the OneDrive folder in the ```ip_to_as``` folder.
+Please, copy the contents of the OneDrive folder in the ```ip_to_as``` folder.
 
 
