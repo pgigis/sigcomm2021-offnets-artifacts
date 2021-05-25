@@ -48,67 +48,80 @@ cd analysis
 
 **Step 1**: Extract End-Entity (EE) certificates.
 
-In this step, the script takes as an input the certificate dataset and extracts the EE certificates.
-The script excludes expired, self-signed and root/intermediate certificates that are not present in the CCADB [Common CA Database](https://www.ccadb.org).
+As first this step, the script takes as an input the certificate dataset and extracts the EE certificate of each IP.
+Expired, self-signed and root/intermediate certificates that are not present in the CCADB [Common CA Database](https://www.ccadb.org) are filtered out.
 
-Currently, the following two input datasets are supported:
+Currently, as an input we support the following two datasets:
 
-1) Active Scan
-2) Rapid7 Certificates
+1) Active Scan (Certigo)
+2) Rapid7 Certificates 
 
+To run the script, execute the following command:
 ```
-python3 extract_ee_certs.py
+python3 extract_valid_certs.py -d 21-11-2019 -t active -i ../datasets/certificates/active/
 ```
 
-This will generate, a single JSON line-by-line file. Each line contains a JSON object with the following format:
-
+This will generate the folder "active_21-11-2019" inside the "analysis/results" directorty.
+Inside the folder it will create a single JSON line-by-line file "ee_certs.txt". Each line contains a JSON object formatted as:
 ```
 { "ip" : "EndEntity-Certificate" }
 ```
 
-**Step 2**: Process hypergiant on-net certificates.
 
-The script takes as an input the generated file from step 1 and the hypergiant keyword (e.g., google).
+**Step 2**: Find TLS fingerprints using hypergiant on-net certificates.
+The script takes as an input the generated file of step 1, the configuration file, the list of HG ASes and, the IP-to-AS mapping.
 
-
-Configuration file:
+The configuration file contains a mapping between the candidate HG keyword and the HG ASes.
+Below is an example of a configuration file. 
 ```
 {"hypergiant-keyword" : "google", "hypergiant-ases-key" : "google"}
 {"hypergiant-keyword" : "facebook", "hypergiant-ases-key" : "facebook"}
+{"hypergiant-keyword" : "netflix", "hypergiant-ases-key" : "netflix"}
+{"hypergiant-keyword" : "akamai", "hypergiant-ases-key" : "akamai"}
+{"hypergiant-keyword" : "alibaba", "hypergiant-ases-key" : "alibaba"}
+{"hypergiant-keyword" : "youtube", "hypergiant-ases-key" : "google"}
 ```
 
-The complete list of available hypergiant-ases is the following:
+Any value can be used as a "hypergiant-keyword". For the "hypergiant-ases-key" we support the following values:
+```
 ['yahoo', 'cdnetworks', 'limelight', 'microsoft', 'chinacache', 'apple', 'alibaba', 'amazon', 'akamai', 'bitgravity', 'cachefly', 'cloudflare', 'disney', 'facebook', 'google', 'highwinds', 'hulu', 'incapsula', 'netflix', 'cdn77', 'twitter', 'fastly']
-
-
-```
-python3 extract_hypergiant_on-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json  -i results/active_21-11-2019/all_ee_certs.txt  -c config.json -a ../datasets/ip_to_as/2019_11_25thres_db.json
 ```
 
-This will generate, a single JSON line-by-line file that includes only the *dns_names* and *subject:organization* fields of the EE certificates found in IP addresses of the HG AS(es). Each line contains a JSON object with the following format:
-
-
+To run the script, execute the following command:
 ```
-{ "ip" : StringValue, "ASN" : IntegerValue, "dns_names" : [ StringValue, ], "subject:organization" : StringValue }
+python3 extract_hypergiant_on-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json  -i results/active_21-11-2019/ee_certs.txt  -c config.json -a ../datasets/ip_to_as/2019_11_25thres_db.json
 ```
 
+This will create a new folder "on-nets" inside "analysis/results/active\_21-11-2019/". The folder contains a file per HG keyword. Each file includes only the *dns_names* and *subject:organization* fields of the EE certificates found in IP addresses of the HG AS(es) using this specific keyword. 
 
-**Step 3**: Find hypergiant certificates in off-nets. 
-
-Takes as an input the Hypergiant keyword
+Below is an output example. 
 ```
-python3 extract_hypergiant_off-net_certs.py
-```
-
-This will generate, a single JSON line-by-line file that includes only the *dns_names* and *subject:organization* fields of the EE certificates found in IP addresses of the HG AS(es). Each line contains a JSON object with the following format:
-
-
-```
-{ "ip" : StringValue, "ASN" : IntegerValue, "dns_names" : [ StringValue, ], "subject:organization" : StringValue }
+{"ip": "23.72.3.228", "ASN": 16625, "dns_names": ["try.akamai.com", "threatresearch.akamai.com"], "subject:organization": "akamai technologies, inc. "}
+{"ip": "23.223.192.18", "ASN": 20940, "dns_names": ["a248.e.akamai.net", "*.akamaized-staging.net", "*.akamaized.net", "*.akamaihd-staging.net", "*.akamaihd.net"], "subject:organization": "akamai technologies, inc. "}
+{"ip": "172.232.1.72", "ASN": 20940, "dns_names": ["a248.e.akamai.net", "*.akamaized-staging.net", "*.akamaized.net", "*.akamaihd-staging.net", "*.akamaihd.net"], "subject:organization": "akamai technologies, inc. "}
+{"ip": "210.61.248.97", "ASN": 20940, "dns_names": ["a248.e.akamai.net", "*.akamaized-staging.net", "*.akamaized.net", "*.akamaihd-staging.net", "*.akamaihd.net"], "subject:organization": "akamai technologies, inc. "}
 ```
 
 
-**Step 4**: Process HTTP and HTTPs.
+**Step 3**: Find candidate hypergiant off-nets. 
+The script takes as an input the generated file of step 1, the generated folder of step 2 that contains the on-net fingerprints, the list of HG ASes and, the IP-to-AS mapping.
+
+To run the script, execute the following command:
+```
+python3 extract_hypergiant_off-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json -i results/active_21-11-2019/ee_certs.txt -c config.txt -a ../datasets/ip_to_as/2019_11_25thres_db.json -o results/active_21-11-2019/on-nets
+```
+
+This will create a new folder "candidate\_off-nets" inside "analysis/results/active\_21-11-2019/". The folder contains a file per HG keyword. Each file includes only the *dns_names* and *subject:organization* fields of the EE certificates found in IP addresses outside of the HG AS(es) using this specific keyword. 
+
+```
+{"ip": "80.239.236.44", "dns_names": ["a248.e.akamai.net", "*.akamaized-staging.net", "*.akamaized.net", "*.akamaihd-staging.net", "*.akamaihd.net"], "subject:organization": "akamai technologies, inc. ", "ASN": 1299}
+{"ip": "2.18.52.28", "dns_names": ["a248.e.akamai.net", "*.akamaized-staging.net", "*.akamaized.net", "*.akamaihd-staging.net", "*.akamaihd.net"], "subject:organization": "akamai technologies, inc. ", "ASN": 33905}
+{"ip": "2.16.173.163", "dns_names": ["a248.e.akamai.net", "*.akamaized-staging.net", "*.akamaized.net", "*.akamaihd-staging.net", "*.akamaihd.net"], "subject:organization": "akamai technologies, inc. ", "ASN": 20940}
+{"ip": "77.94.66.28", "dns_names": ["a248.e.akamai.net", "*.akamaized-staging.net", "*.akamaized.net", "*.akamaihd-staging.net", "*.akamaihd.net"], "subject:organization": "akamai technologies, inc. ", "ASN": 60772}
+```
+
+
+**Step 4**: Parse HTTP and HTTPS headers.
 
 
 
