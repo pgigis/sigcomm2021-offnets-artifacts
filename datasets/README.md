@@ -9,7 +9,10 @@ The TLS/SSL scans that we used in our longitudinal analysis can be found [here](
 According to the Rapid7 dataset [documentation](https://opendata.rapid7.com/sonar.ssl/): 
 
 > The ```_hosts``` files provide mapping between the IPs/endpoints and the fingerprint of the X.509 certificate presented.
-> The ```_certs``` file provides a mapping of the net new certificates from a given study and the corresponding fingerprint. The _names file provides a mapping of the X.509 certificate name (CN) to its fingerprint.
+> The ```_certs``` file provides a mapping of the net new certificates from a given study and the corresponding fingerprint. 
+
+In our analysis we had to download all ```_certs``` available to construct a global mapping between fingerprints and the raw certificate in PEM format.
+Moreover, we found that some fingerprints where not present in the related to HTTPS GET port-443 files and we downloaded all ```_certs``` of both available TLS/SSL certificate datasets ([SSL Certificates](https://opendata.rapid7.com/sonar.ssl/) and [More SSL Certificates (non-443)](https://opendata.rapid7.com/sonar.moressl/)). We list exactly which files we used [here-1](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/tls_scans/rapid7/certificates/ssl_certificates_https_443_filenames.txt), [here-2](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/tls_scans/rapid7/certificates/more_ssl_certificates_non_443_filenames.txt) and [here-3](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/tls_scans/rapid7/certificates/ssl_certificates_https_non_443_filenames.txt). 
 
 Rapid7 
 
