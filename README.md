@@ -95,7 +95,6 @@ Below is an example of a configuration file.
 {"hypergiant-keyword" : "netflix", "hypergiant-ases-key" : "netflix"}
 {"hypergiant-keyword" : "akamai", "hypergiant-ases-key" : "akamai"}
 {"hypergiant-keyword" : "alibaba", "hypergiant-ases-key" : "alibaba"}
-{"hypergiant-keyword" : "youtube", "hypergiant-ases-key" : "google"}
 ```
 
 Any value can be used as a ```"hypergiant-keyword"```. For the ```"hypergiant-ases-key"``` we support the following values:
