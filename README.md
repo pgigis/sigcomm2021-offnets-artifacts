@@ -49,10 +49,13 @@ To fully reproduce our findings, you will need to gain access to the following d
 We provide a detailed documentation, on how to download and process the Rapid7 dataset here.
 
 Except the Rapid7 certificates we also used TLS certificate data derived from an active scan that we conducted in Nov. 2019
-but also data derived from the [Censys](https://censys.io/) platflorm. You can read more on how to obtain Research access [here](https://support.censys.io/hc/en-us/articles/360038761891-Research-Access-to-Censys-Data).
+but also data derived from the [Censys](https://censys.io/) platflorm. You can read more on how to obtain Research access to the Censys platform [here](https://support.censys.io/hc/en-us/articles/360038761891-Research-Access-to-Censys-Data).
 
 
 ## Analysis
+For the analysis part, we suggest you to populate the datasets folder with all required datasets.
+The next steps suffice to infer the off-nets of the considered Hypergiants in this study. We will include more analysis commands that are available in the software at a later stage.
+
 
 ### **Step 0**:
 ```
