@@ -3,7 +3,7 @@
 Table of Contents
 * [Getting Started](#getting-started)
     * [Prerequisites and Installation](#prerequisites-and-installation)
-    * [Getting Acccess to the Datasets](#getting-acccess-to-the-datasets
+    * [Getting Acccess to the Datasets](#getting-acccess-to-the-datasets)
 
 ## Getting Started
 ### Prerequisites and Installation
@@ -25,6 +25,7 @@ Then, install the required python3 packages within the venv:
 pip3 install -r requirements.txt
 ```
 In case a required dependency is missing please contact [p.gkigkis at cs.ucl.ac.uk]().
+
 
 ### Getting Acccess to the Datasets
 The main dataset that we use for the longitudinal study (e.g., TLS/SSL certificates, HTTP(S) headers), is derived from the [Rapid7 - Open Data](https://opendata.rapid7.com) platform. 
@@ -172,7 +173,7 @@ The ```map_networks.py``` script outputs a tab separated line of ```ip, network,
 
 
 
-**Step 5**: Compare TLS/SSL certificates inferences with HTTP(s) headers.
+### **Step 5**: Compare TLS/SSL certificates inferences with HTTP(s) headers.
 
 ```
 python3 compare_cert_headers.py
