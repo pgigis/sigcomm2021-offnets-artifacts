@@ -32,7 +32,7 @@ Moreover, we found that some fingerprints where not present in the related to HT
 ### HTTP headers
 The HTTP GET Responses that we used in our analysis can be found [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/headers/http/http_80_filenames.txt).
 
-### HTTPs headers
+### HTTPS headers
 The HTTPS GET Responses that we used in our analysis can be found [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/headers/https/https_443_filenames.txt).
 
 
