@@ -33,28 +33,6 @@ Our methodology uses TLS certificate scans as a building block, supplementing th
 
 We document in detail the datasets [here]().
 
-In addition to this GitHub repository, we provide an OneDrive directory which contains additional datasets used in this work.
-
-For our longitudinal analysis, we used TLS certificate scans and HTTP(S) headers, derived from the [Rapid7 - Open Data](https://opendata.rapid7.com) platform.
-
-To access the historical datasets of Rapid7 Open Data platform you need to apply for an account.
-```Data access is free to Practitioners, Academics, and Researchers.```
-
-To create an account to the Rapid7 Opendata platform visit:
-https://opendata.rapid7.com/sonar.ssl/
-
-Then search "Gain Unlimited Access to Our Datasets" (located close to the bottom of the page) and click on "Create a free account".
-To fully reproduce our findings, you will need to gain access to the following datasets.
-* SSL Certificates
-* More SSL Certificates (non-443)
-* HTTP GET Responses
-* HTTPS GET Responses
-
-We provide a detailed documentation, on how to download and process the Rapid7 dataset [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/tree/readme/datasets).
-
-Except the Rapid7 certificates we also used TLS certificate data derived from an active scan that we conducted in Nov. 2019
-but also from the [Censys](https://censys.io/) platflorm. You can read more on how to obtain Research access to the Censys platform [here](https://support.censys.io/hc/en-us/articles/360038761891-Research-Access-to-Censys-Data).
-
 
 ## Analysis
 For the analysis part, we suggest to populate the ```datasets``` folder of this repository, following these [instructions](https://github.com/pgigis/sigcomm2021-offnets-artifacts/tree/readme/datasets).
