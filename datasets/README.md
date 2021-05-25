@@ -1,10 +1,12 @@
 # Datasets
 
-Due to the size of the datasets, we provide [here](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabpgk_ucl_ac_uk/Eim32GoBUgVOoLolQCYbbyMBSf-PiNBbOzuQl52n3Xm94w?e=7GOz5l) an OneDrive directory which contains additional datasets used in this work.
+Due to the size of the datasets, we provide [here](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabpgk_ucl_ac_uk/Eim32GoBUgVOoLolQCYbbyMBSf-PiNBbOzuQl52n3Xm94w?e=7GOz5l) an OneDrive directory, that contains additional datasets used in this work.
 
-
-## Download Rapid7 data
 For our longitudinal analysis, we used TLS certificate scans and HTTP(S) headers, derived from the [Rapid7 - Open Data](https://opendata.rapid7.com) platform.
+
+## Rapid7 Datasets
+
+### Download data
 
 To access the historical datasets of Rapid7 Open Data platform you need to apply for an account.
 ```Data access is free to Practitioners, Academics, and Researchers.```
@@ -59,6 +61,7 @@ The HTTP GET Responses that we used in our analysis can be found [here](https://
 ### HTTPS headers
 The HTTPS GET Responses that we used in our analysis can be found [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/headers/https/https_443_filenames.txt).
 
+## Active Scan
 
 As we use a snapshot every three months (January, April, July, October), we alligned each dataset to the closest available date.
 
