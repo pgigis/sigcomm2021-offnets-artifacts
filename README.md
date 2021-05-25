@@ -29,31 +29,27 @@ In case a required dependency is missing please contact [p.gkigkis at cs.ucl.ac.
 
 
 ### Getting Acccess to the Datasets
-The methodology of this work, uses TLS certificate scans as a building block, supplementing them with additional datasets (e.g., APNIC population estimates, CAIDA AS Relationship Dataset, IP-to-AS mapping, etc..). In addition to this repo, we provide an OneDrive directory which contains additional datasets used in this work.
+Our methodology uses TLS certificate scans as a building block, supplementing them with additional techniques and datasets (e.g., APNIC population estimates, CAIDA AS Relationship Dataset, IP-to-AS mapping, etc..). In addition to this repo, we provide an OneDrive directory which contains additional datasets used in this work.
 
-The main datasets that we use for our longitudinal study (e.g., TLS/SSL certificates, HTTP(S) headers), are derived from the [Rapid7 - Open Data](https://opendata.rapid7.com) platform.
+For our longitudinal analysis, we used TLS certificate scans and HTTP(S) headers, derived from the [Rapid7 - Open Data](https://opendata.rapid7.com) platform.
 
-To access the historical dataset you have to apply for an account. 
+To access the historical datasets of Rapid7 Open Data platform you need to apply for an account.
 ```Data access is free to Practitioners, Academics, and Researchers.```
 
 To create an account to the Rapid7 Opendata platform visit:
 https://opendata.rapid7.com/sonar.ssl/
 
-Then search "Gain Unlimited Access to Our Datasets" and click on "Create a free account".
-To fully reproduce our findings, you will need gain access to the following datasets.
+Then search "Gain Unlimited Access to Our Datasets" (located close to the bottom of the page) and click on "Create a free account".
+To fully reproduce our findings, you will need to gain access to the following datasets.
 * SSL Certificates
 * More SSL Certificates (non-443)
 * HTTP GET Responses
 * HTTPS GET Responses
 
+We provide a detailed documentation, on how to download and process the Rapid7 dataset here.
 
-### TLS certificate data
-In this work, we use the following three sources of TLS certificate datasets.
-* Rapid7  
-* Active Scan (Certigo)
-* Censys
-
-#### Censys Data
+Except the Rapid7 certificates we also used TLS certificate data derived from an active scan that we conducted in Nov. 2019
+but also data derived from the [Censys](https://censys.io/) platflorm. You can read more on how to obtain Research access [here](https://support.censys.io/hc/en-us/articles/360038761891-Research-Access-to-Censys-Data).
 
 
 ## Analysis
