@@ -4,6 +4,8 @@ Table of Contents
 * [Getting Started](#getting-started)
     * [Prerequisites and Installation](#prerequisites-and-installation)
     * [Getting Acccess to the Datasets](#getting-acccess-to-the-datasets)
+* [Analysis](#analysis)
+
 
 ## Getting Started
 ### Prerequisites and Installation
