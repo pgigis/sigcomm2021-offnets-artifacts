@@ -138,12 +138,17 @@ This will create a new folder ```"candidate_off-nets"``` inside ```"analysis/res
 
 
 ### **Step 4**: Parse HTTP and HTTPS headers.
-**Step 4.1** Pipe the Rapid7 data file to the ```parse_rapid7.py``` script. The command below works well.
+Please refer here on how to obtain these files. Due to the size of these files (~60GB compressed) we suggest you to not completely uncompress them.
+In our analysis, we always use the gunzip -kc flags to keep the compressed file and send output to stout.
+
+**Step 4.1** Find the header names.
+
+Execute the following command:
 ```
 gunzip -kc 2019-11-18-1574084778-https_get_443.json.gz | ./parse_rapid7.py | awk -F'\t' '{ if(NF == 2) print $0 }' | gzip > 20191118-https.gz
 ```
-That script outputs a tab separated line with ```<ip>\t<header-list>```. Each header name, header value pair is separated by ":", and each header pair is separated by "|".
-The script contains a list of "uninteresting" headers which are ignored (e.g. "Server: Apache/PHP"). IP values without "interesting" headers or any headers are output with an empty ```header-list``` so we can keep track of IPs missing from the dataset.
+
+The output of the script is a tab separated line with ```<ip>\t<header-list>```. Each header name, header value pair is separated by ":", and each header pair is separated by "|". The script contains a list of "uninteresting" headers which are ignored (e.g. "Server: Apache/PHP"). Finally, IP values without "interesting" headers or any headers are output with an empty ```header-list``` so we can keep track of IPs missing from the dataset.
 
 Below is an output example. 
 ```
@@ -156,7 +161,7 @@ Below is an output example.
 23.57.49.186    Server:AkamaiGHost
 ```
 
-**Step 4.2** Apply the header rules in hypergiant-headers.txt to the file generated in step 2.
+**Step 4.2** Apply the header rules in hypergiant-headers.txt to the file generated in step 4.1.
 ```
 gunzip -kc 20191118-http.gz | python3 ./map_networks.py | gzip > 20191118-http-mapped.txt.gz
 ```
