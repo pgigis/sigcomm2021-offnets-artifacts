@@ -29,7 +29,7 @@ In case a required dependency is missing please contact [p.gkigkis at cs.ucl.ac.
 ### Getting Acccess to the Datasets
 The methodology of this work, uses TLS certificate scans as a building block, supplementing them with additional datasets (e.g., APNIC population estimates, CAIDA AS Relationship Dataset, IP-to-AS mapping, etc..). In addition to this repo, we provide an OneDrive directory which contains additional datasets used in this work.
 
-The main dataset that we use for our longitudinal study (e.g., TLS/SSL certificates, HTTP(S) headers), is derived from the [Rapid7 - Open Data](https://opendata.rapid7.com) platform.
+The main datasets that we use for our longitudinal study (e.g., TLS/SSL certificates, HTTP(S) headers), are derived from the [Rapid7 - Open Data](https://opendata.rapid7.com) platform.
 
 To access the historical dataset you have to apply for an account. 
 ```Data access is free to Practitioners, Academics, and Researchers.```
