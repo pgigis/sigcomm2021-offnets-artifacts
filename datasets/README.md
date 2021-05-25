@@ -39,7 +39,7 @@ The official Rapid7 Open Data API documentation is [here](https://opendata.rapid
 In this work, we used three different sources of TLS/SSL scans (Rapid7 - Open Data, Censys, Active Scan).
 
 ### Rapid7 
-The TLS/SSL scans that we used in our longitudinal analysis can be found [here](https://opendata.rapid7.com/sonar.ssl/). In our study we used HTTPS GET requests on port-443. More specifically, in our analysis we use the ```_hosts``` and ```_certs``` files.
+The TLS/SSL scans that we used in our longitudinal analysis can be found [here](https://opendata.rapid7.com/sonar.ssl/). In our study we used the HTTPS GET requests on port-443. More specifically, in our analysis we use the ```_hosts``` and ```_certs``` files.
 
 According to the Rapid7 dataset [documentation](https://opendata.rapid7.com/sonar.ssl/):
 
