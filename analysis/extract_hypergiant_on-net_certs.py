@@ -4,25 +4,7 @@ import pprint
 import argparse
 import pytricia
 
-from lib.helpers import load_ip_to_as_mapping, createPath, load_config_file, load_hypergiant_ases
-
-
-def process_configuration_file(configuration_input, hg_ases):
-	# Check if for all keywords, a hypergiant-ases-key in the hypergiant ASes file.
-	for input_ in configuration_input:	
-		if configuration_input[input_] not in hg_ases:
-			print("-> hypergiant-ases-key \"{}\" not found.".format(configuration_input[input_] ))
-			print("Available \"hypergiant-ases-key\" keys:\n{}".format(list(hg_ases.keys())))
-			return None
-	
-	hg_asn_to_hg_keywords = dict()		
-	for hg_keyword in configuration_input:
-		for ASN in hg_ases[configuration_input[hg_keyword]]:
-			if ASN not in hg_asn_to_hg_keywords:
-				hg_asn_to_hg_keywords[ASN] = set()
-			hg_asn_to_hg_keywords[ASN].add(hg_keyword)
-	
-	return hg_asn_to_hg_keywords
+from lib.helpers import load_ip_to_as_mapping, createPath, load_config_file, load_hypergiant_ases, process_configuration_file
 
 
 def process_ee_certs(inputFile, ip_to_as, hg_asn_to_hg_keywords, filePathToStoreResults):

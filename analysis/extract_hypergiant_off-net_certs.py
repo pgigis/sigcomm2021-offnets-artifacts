@@ -5,7 +5,7 @@ import pprint
 import argparse
 
 from anytree import Node
-from lib.helpers import load_ip_to_as_mapping, createPath, load_config_file, load_hypergiant_ases
+from lib.helpers import load_ip_to_as_mapping, createPath, load_config_file, load_hypergiant_ases, process_configuration_file
 
 
 def load_tld_suffixes(file_path_suffixes="../datasets/tld_suffixes/suffixes.txt"):
@@ -116,7 +116,7 @@ def process_off_nets(inputFile, ip_to_as, dns_names_per_hg, hg_asn_to_hg_keyword
 								is_on_net = False
 								for asn in asns:
 									if asn in hg_asn_to_hg_keywords:
-										if hg_keyword in hg_asn_to_hg_keywords[asn]
+										if hg_keyword in hg_asn_to_hg_keywords[asn]:
 											is_on_net = True
 
 								if is_on_net == False:
