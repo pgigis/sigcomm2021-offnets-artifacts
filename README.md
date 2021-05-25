@@ -53,7 +53,7 @@ but also data derived from the [Censys](https://censys.io/) platflorm. You can r
 
 
 ## Analysis
-For the analysis part, we suggest you to populate the datasets folder with all required datasets.
+For the analysis part, we suggest you to populate the ```datasets``` folder of this repo, following these instructions.
 The next steps suffice to infer the off-nets of the considered Hypergiants in this study. We will include more analysis commands that are available in the software at a later stage.
 
 
@@ -127,7 +127,7 @@ To run the script, execute the following command:
 python3 extract_hypergiant_off-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json -i results/active_21-11-2019/ee_certs.txt -c config.txt -a ../datasets/ip_to_as/2019_11_25thres_db.json -o results/active_21-11-2019/on-nets
 ```
 
-This will create a new folder ```"candidate\_off-nets"``` inside ```"analysis/results/active_21-11-2019/"```. The folder contains a file per HG keyword. Each file includes only the ```*dns_names*``` and ```*subject:organization*``` fields of the EE certificates found in IP addresses outside of the HG AS(es) using this specific keyword. 
+This will create a new folder ```"candidate_off-nets"``` inside ```"analysis/results/active_21-11-2019/"```. The folder contains a file per HG keyword. Each file includes only the ```*dns_names*``` and ```*subject:organization*``` fields of the EE certificates found in IP addresses outside of the HG AS(es) using this specific keyword. 
 
 ```
 {"ip": "80.239.236.44", "dns_names": ["a248.e.akamai.net", "*.akamaized-staging.net", "*.akamaized.net", "*.akamaihd-staging.net", "*.akamaihd.net"], "subject:organization": "akamai technologies, inc. ", "ASN": 1299}
