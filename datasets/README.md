@@ -66,6 +66,6 @@ As we use a snapshot every three months (January, April, July, October), we alli
 
 The IP-to-AS mappings that we used in this work can be [here](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabpgk_ucl_ac_uk/EujvVAp0lqBBpY-EgY5IZSgBLTgoxv7xwtRW92YGe9hDLA?e=2iSwLV).
 
-Please copy the contents of the OneDrive folder in ```ip_to_as``` folder.
+Please copy the contents of the OneDrive folder in the ```ip_to_as``` folder.
 
 
