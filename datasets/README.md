@@ -1,6 +1,25 @@
 ## Download Rapid7 data
 
+
+
+
+
+## How to download a file
+At first you need to an acount and create an API key.
+
+After this, using the following command you can request a download link from Rapid7. (Note: The link is only valid for a few hours.)
+```
+curl -H "X-Api-Key: XXX" https://us.api.insight.rapid7.com/opendata/studies/<DATASET-NAME>/<FILENAME>/download/
+```
+To successfully execute the above command, you will need an API key, the dataset name (e.g., sonar.http or sonar.https) and the download file name (e.g., 2019-11-18-1574121404-http_get_80.json.gz).
+
+Then, you will received a download link and using the example below, you can resume the download if it interrupted and will work even if you use a new URL.
+```
+curl -L -o 2019-11-18-1574121404-http_get_80.json.gz -C - https://f002.backblazeb2.com/file/rapid7-opendata/sonar.http/2019-11-18-1574121404-http_get_80.json.gz?Authorization=30023402023
+```
+
 The official Rapid7 Open Data API help is [here](https://opendata.rapid7.com/apihelp/).
+
 
 ### TLS/SSL scans
 
