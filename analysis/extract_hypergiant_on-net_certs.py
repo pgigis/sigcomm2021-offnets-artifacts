@@ -109,9 +109,9 @@ def process_ee_certs(inputFile, ip_to_as, hg_asn_to_hg_keywords, all_hg_keywords
 			if keywords_matched is not None:
 				if 'subject' in data[ip]:
 					if 'organization' in data[ip]['subject']:
-						organization_value = " ".join(data[ip]['subject']['organization'])
+						organization_value = (" ".join(data[ip]['subject']['organization'])).lower()
 						for keyword in keywords_matched:
-							if keyword in organization_value.lower():
+							if keyword in organization_value:
 								storeJSON = { 
 												"ip" : ip,
 												"ASN" : foundASN,
@@ -156,8 +156,5 @@ if __name__ == '__main__':
 	hg_asn_to_hg_keywords, all_hg_keywords = proces_configuration_file(configuration_input, hg_asn_to_hg_keyword, hg_keywords_available)
 	
 	process_ee_certs(args.inputFile, ip_to_as, hg_asn_to_hg_keywords, all_hg_keywords, filePathToStoreResults)
-
-
-
 
 
