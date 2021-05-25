@@ -9,7 +9,6 @@ Table of Contents
 ### Prerequisites and Installation
 The entire software was written in python3, which has to be pre-installed on your system.
 
-
 Install pip3:
 ```
 sudo apt-get install python3-pip
@@ -28,7 +27,9 @@ In case a required dependency is missing please contact [p.gkigkis at cs.ucl.ac.
 
 
 ### Getting Acccess to the Datasets
-The main dataset that we use for the longitudinal study (e.g., TLS/SSL certificates, HTTP(S) headers), is derived from the [Rapid7 - Open Data](https://opendata.rapid7.com) platform. 
+The methodology of this work, uses TLS certificate scans as a building block, supplementing them with additional datasets (e.g., APNIC population estimates, CAIDA AS Relationship Dataset, IP-to-AS mapping, etc..). In addition to this repo, we provide an OneDrive directory which contains additional datasets used in this work.
+
+The main dataset that we use for the longitudinal study (e.g., TLS/SSL certificates, HTTP(S) headers), is derived from the [Rapid7 - Open Data](https://opendata.rapid7.com) platform.
 
 To access the historical dataset you have to apply for an account. 
 ```Data access is free to Practitioners, Academics, and Researchers.```
@@ -43,12 +44,14 @@ To fully reproduce our findings, you will need gain access to the following data
 * HTTP GET Responses
 * HTTPS GET Responses
 
+
 ### TLS certificate data
 In this work, we use the following three sources of TLS certificate datasets.
 * Rapid7  
 * Active Scan (Certigo)
 * Censys
 
+#### Censys Data
 
 
 ## Analysis
@@ -60,7 +63,7 @@ cd analysis
 
 ### **Step 1**: Extract End-Entity (EE) certificates.
 
-As first this step, the script takes as an input the certificate dataset and extracts the EE certificate of each IP.
+As a first step, the script takes as an input the certificate dataset and extracts the EE certificate of each IP.
 Expired, self-signed and root/intermediate certificates that are not present in the CCADB [Common CA Database](https://www.ccadb.org) are filtered out.
 
 Currently, as an input we support the following two datasets:
@@ -94,7 +97,7 @@ Below is an example of a configuration file.
 {"hypergiant-keyword" : "youtube", "hypergiant-ases-key" : "google"}
 ```
 
-Any value can be used as a ```"hypergiant-keyword".``` For the ```"hypergiant-ases-key"``` we support the following values:
+Any value can be used as a ```"hypergiant-keyword"```. For the ```"hypergiant-ases-key"``` we support the following values:
 ```
 ['yahoo', 'cdnetworks', 'limelight', 'microsoft', 'chinacache', 'apple', 'alibaba', 'amazon', 'akamai', 'bitgravity', 'cachefly', 'cloudflare', 'disney', 'facebook', 'google', 'highwinds', 'hulu', 'incapsula', 'netflix', 'cdn77', 'twitter', 'fastly']
 ```
@@ -104,7 +107,7 @@ To run the script, execute the following command:
 python3 extract_hypergiant_on-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json  -i results/active_21-11-2019/ee_certs.txt  -c config.json -a ../datasets/ip_to_as/2019_11_25thres_db.json
 ```
 
-This will create a new folder ```"on-nets"``` inside ```"analysis/results/active\_21-11-2019/"```. The folder contains a file per HG keyword. Each file includes only the ```*dns_names*``` and ```*subject:organization*``` fields of the EE certificates found in IP addresses of the HG AS(es) using this specific keyword. 
+This will create a new folder ```"on-nets"``` inside ```"analysis/results/active_21-11-2019/"```. The folder contains a file per HG keyword. Each file includes only the ```*dns_names*``` and ```*subject:organization*``` fields of the EE certificates found in IP addresses of the HG AS(es) using this specific keyword. 
 
 Below is an output example. 
 ```
@@ -123,7 +126,7 @@ To run the script, execute the following command:
 python3 extract_hypergiant_off-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json -i results/active_21-11-2019/ee_certs.txt -c config.txt -a ../datasets/ip_to_as/2019_11_25thres_db.json -o results/active_21-11-2019/on-nets
 ```
 
-This will create a new folder ```"candidate\_off-nets"``` inside ```"analysis/results/active\_21-11-2019/"```. The folder contains a file per HG keyword. Each file includes only the ```*dns_names*``` and ```*subject:organization*``` fields of the EE certificates found in IP addresses outside of the HG AS(es) using this specific keyword. 
+This will create a new folder ```"candidate\_off-nets"``` inside ```"analysis/results/active_21-11-2019/"```. The folder contains a file per HG keyword. Each file includes only the ```*dns_names*``` and ```*subject:organization*``` fields of the EE certificates found in IP addresses outside of the HG AS(es) using this specific keyword. 
 
 ```
 {"ip": "80.239.236.44", "dns_names": ["a248.e.akamai.net", "*.akamaized-staging.net", "*.akamaized.net", "*.akamaihd-staging.net", "*.akamaihd.net"], "subject:organization": "akamai technologies, inc. ", "ASN": 1299}
@@ -178,3 +181,6 @@ The ```map_networks.py``` script outputs a tab separated line of ```ip, network,
 ```
 python3 compare_cert_headers.py
 ```
+
+
+
