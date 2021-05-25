@@ -166,7 +166,7 @@ Below is an output example.
 gunzip -kc 20191118-http.gz | python3 ./map_networks.py | gzip > 20191118-http-mapped.txt.gz
 ```
 
-The ```map_networks.py``` script outputs a tab separated line of ```ip, network, asn, asn_name, header_match```. IPs with no CDN header matches are also output to keep track of what IPs are present in the data.
+The ```map_networks.py``` script outputs a tab separated line of ```ip, network, asn_name, header_match```. IPs with no CDN header matches are also output to keep track of what IPs are present in the data.
 
 ```
 104.24.40.135   Cloudflare      13335   CLOUDFLARENET; US       server:cloudflare
