@@ -109,7 +109,10 @@ def process_ee_certs(inputFile, ip_to_as, hg_asn_to_hg_keywords, all_hg_keywords
 			if keywords_matched is not None:
 				if 'subject' in data[ip]:
 					if 'organization' in data[ip]['subject']:
-						organization_value = (" ".join(data[ip]['subject']['organization'])).lower()
+						organization_value = ""
+						for item in data[ip]['subject']['organization']:
+							if item is not None:
+								organization_value += item.lower() + " "
 						for keyword in keywords_matched:
 							if keyword in organization_value:
 								storeJSON = { 

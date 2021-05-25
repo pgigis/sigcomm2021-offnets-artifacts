@@ -144,7 +144,10 @@ def process_off_nets(inputFile, ip_to_as, dns_names_per_hg, hg_asn_to_hg_keyword
 			if is_on_net == False:
 				if 'subject' in data[ip]:
 					if 'organization' in data[ip]['subject']:
-						organization_value = (" ".join(data[ip]['subject']['organization'])).lower()
+						organization_value = ""
+						for item in data[ip]['subject']['organization']:
+							if item is not None:
+								organization_value += item.lower() + " "
 						for hg_keyword in hg_keywords:
 							if hg_keyword in organization_value:
 								for dns_name in data[ip]['dns_names']:
