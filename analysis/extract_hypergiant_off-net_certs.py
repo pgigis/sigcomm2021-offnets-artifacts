@@ -109,7 +109,7 @@ def process_off_nets(inputFile, ip_to_as, dns_names_per_hg, hg_asn_to_hg_keyword
 						for item in data[ip]['subject']['organization']:
 							if item is not None:
 								organization_value += item.lower() + " "
-						for hg_keyword in hg_keywords:
+						for hg_keyword in hg_keywords_l:
 							if hg_keyword in organization_value:
 
 								#Check if is an on-net of hypergiant
