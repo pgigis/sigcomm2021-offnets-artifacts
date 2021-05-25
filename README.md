@@ -19,8 +19,6 @@ To fully reproduce our findings, you will need gain access to the following data
 * HTTPS GET Responses
 
 
-
-
 ### Prerequisites and Installation
 The entire software was written in python3, which has to be pre-installed on your system.
 
@@ -71,6 +69,18 @@ This will generate, a single JSON line-by-line file. Each line contains a JSON o
 **Step 2**: Process hypergiant on-net certificates.
 
 The script takes as an input the generated file from step 1 and the hypergiant keyword (e.g., google).
+
+
+Configuration file:
+```
+{"hypergiant-keyword" : "google", "hypergiant-ases-key" : "google"}
+{"hypergiant-keyword" : "facebook", "hypergiant-ases-key" : "facebook"}
+```
+
+The complete list of available hypergiant-ases is the following:
+['yahoo', 'cdnetworks', 'limelight', 'microsoft', 'chinacache', 'apple', 'alibaba', 'amazon', 'akamai', 'bitgravity', 'cachefly', 'cloudflare', 'disney', 'facebook', 'google', 'highwinds', 'hulu', 'incapsula', 'netflix', 'cdn77', 'twitter', 'fastly']
+
+
 ```
 python3 extract_hypergiant_on-net_certs.py
 ```
@@ -79,7 +89,7 @@ This will generate, a single JSON line-by-line file that includes only the *dns_
 
 
 ```
-{ "ip" : { "ASN" : IntegerValue, "dns_names" : [ StringValue, ], "subject:organization" : StringValue } }
+{ "ip" : StringValue,  "ASN" : IntegerValue, "dns_names" : [ StringValue, ], "subject:organization" : StringValue }
 ```
 
 
