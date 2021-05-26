@@ -62,7 +62,7 @@ Fingerprint-3, Raw-PEM-3
 
 Then, you will need to transform the raw PEM certificate entries to JSON formatted entries. To do this efficiently, we modified the Certigo tool to take as input a file formatted as previously described.
 
-You can download our custom Certigo version [here](https://github.com/pgigis/certigo).
+You can find our custom Certigo version [here](https://github.com/pgigis/certigo).
 
 To run the tool, execute the following command:
 ```
