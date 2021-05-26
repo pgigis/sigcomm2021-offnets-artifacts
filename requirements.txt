@@ -1,0 +1,4 @@
+pytricia==1.0.2
+anytree==2.8.0
+hashlib=20081119
+py-radix==0.10.0
