@@ -59,8 +59,8 @@ To run the script, execute the following command:
 python3 extract_valid_certs.py -d 21-11-2019 -t active -i ../datasets/certificates/active/
 ```
 
-This will generate the folder "active_21-11-2019" inside the "analysis/results".
-Inside the folder it will create a single JSON line-by-line file "ee_certs.txt". Each line contains a JSON object formatted as:
+This will generate the folder ```active_21-11-2019``` inside the ```analysis/results```.
+Inside the folder it will create a single JSON line-by-line file ```"ee_certs.txt"```. Each line contains a JSON object formatted as:
 ```
 { "ip" : "EndEntity-Certificate" }
 ```
@@ -163,11 +163,19 @@ Here is an output example.
 ```
 
 ### **Step 5**: Compare candidate off-nets with HTTP(S) fingerprints.
+The ```find_offnets.py``` script takes as an input the candidate off-nets folder of Step 3, and the HTTP(S) header fingerprints of Step 4.
 
 Execute the following command:
 ```
 python3 find_offnets.py -o results/active_21-11-2019/candidate_off-nets/ -https results/active_21-11-2019/mapped_headers_names_https_2019-11-18-1574084778-https_get_443.json.gz -http results/active_21-11-2019/mapped_headers_names_2019-11-18-1574121404-http_get_80.json.gz
 ```
+
+This will generate the folder ```"candidate-off-nets"``` inside the ```"analysis/results"```. The folder contains a file per HG keyword.
+Each file is a JSON object formatted as follows:
+```
+{ "AS-1" : [ "IP-1", "IP-2" ],  "AS-2" : [ "IP-3", "IP-4", "IP-5", "IP-6" ] }
+```
+
 
 
 
