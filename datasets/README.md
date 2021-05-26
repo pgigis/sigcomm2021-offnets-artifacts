@@ -49,18 +49,18 @@ According to the Rapid7 dataset [documentation](https://opendata.rapid7.com/sona
 In our analysis, we had to download all ```_certs``` available to construct a global mapping between fingerprints and the raw certificates in PEM format.
 Moreover, we found that some fingerprints were not present in the related to HTTPS GET port-443 files, and consequently we downloaded all ```_certs``` of both available TLS/SSL certificate datasets ([SSL Certificates](https://opendata.rapid7.com/sonar.ssl/) and [More SSL Certificates (non-443)](https://opendata.rapid7.com/sonar.moressl/)). We list exactly which files we used, in order to construct the mapping between fingerprints and raw certificates [here-1](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/tls_scans/rapid7/certificates/ssl_certificates_https_443_filenames.txt), [here-2](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/tls_scans/rapid7/certificates/more_ssl_certificates_non_443_filenames.txt) and [here-3](https://github.com/pgigis/sigcomm2021-offnets-artifacts/blob/master/datasets/tls_scans/rapid7/certificates/ssl_certificates_https_non_443_filenames.txt). 
 
-How proccess Rapid7 certificates:
+How to proccess Rapid7 scans:
 
-After you obtain all cert files, you will need to create a mapping file between fingerprint/hash and the raw PEM certificate.
+After you obtain all ```_certs``` files, you have to create a mapping file between fingerprints/hashes and the raw PEM certificates.
 
-The file should be formatted as follows:
+The desired file should be formatted as follows:
 ```
 Fingerprint-1, Raw-PEM-1
 Fingerprint-2, Raw-PEM-2
 Fingerprint-3, Raw-PEM-3
 ```
 
-As next step, you will need to transform the raw pem entries to JSON formatted certificates. To do this efficiently, we modified the Certigo tool to support as input a file formatted as previously described.
+Then, you will need to transform the raw PEM certificate entries to JSON formatted entries. To do this efficiently, we modified the Certigo tool to take as input a file formatted as previously described.
 
 You can download our custom Certigo version [here](https://github.com/pgigis/certigo).
 
@@ -76,7 +76,7 @@ Fingerprint-2, JSON-CERTIFICATE-1
 Fingerprint-3, JSON-CERTIFICATE-1
 ```
 
-Using this file, you can process the hosts files map an IP address with the corresponding JSON formatted certificate.
+Using this file, you can process the hosts files and map an IP address with to the corresponding JSON formatted certificate.
 
 
 
