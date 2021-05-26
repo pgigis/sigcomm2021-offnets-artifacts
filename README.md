@@ -170,8 +170,9 @@ Execute the following command:
 python3 find_offnets.py -o results/active_21-11-2019/candidate_off-nets/ -https results/active_21-11-2019/mapped_headers_names_https_2019-11-18-1574084778-https_get_443.json.gz -http results/active_21-11-2019/mapped_headers_names_2019-11-18-1574121404-http_get_80.json.gz
 ```
 
-This will generate the folder ```"candidate-off-nets"``` inside the ```"analysis/results"```. The folder contains a file per HG keyword.
-Each file is a JSON object formatted as follows:
+This will generate the folder ```"candidate-off-nets"``` inside the ```"analysis/results"```. The folder contains a file per HG with the off-net ASes and their corresponding IP addresses.
+
+Here is the JSON format of each file:
 ```
 { "AS-1" : [ "IP-1", "IP-2" ],  "AS-2" : [ "IP-3", "IP-4", "IP-5", "IP-6" ] }
 ```
