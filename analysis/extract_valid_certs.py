@@ -72,7 +72,7 @@ def is_valid_cert(certificates_l, ccadb_hashes, snapshot_timestamp):
     return ee_cert
 
 
-def process_active_data(files, ccadb_hashes, snapshot_timestamp, resultPath):
+def process_active_scan_data(files, ccadb_hashes, snapshot_timestamp, resultPath):
     count = 0
     total_files = len(files_l)
 
@@ -95,6 +95,28 @@ def process_active_data(files, ccadb_hashes, snapshot_timestamp, resultPath):
                         ee_cert = is_valid_cert(data[ip]['certificates'], ccadb_hashes, snapshot_timestamp)
                         if ee_cert is not None:
                             fileToWrite.write("{}\n".format(json.dumps({ ip : ee_cert })))
+    fileToWrite.close()
+
+
+def process_rapid7_scan_data(files, ccadb_hashes, snapshot_timestamp, resultPath):
+    count = 0
+    total_files = len(files_l)
+
+    fileToWrite = open(resultPath + "/ee_certs.txt", 'wt')
+
+    with open(file, 'rt') as f:
+        for line in f:
+            try:
+                data = json.loads(line.rstrip())
+            except:
+                print("Couldn't load line {}".format(line))
+                continue
+
+            for ip in data:
+                if 'certificates' in data[ip]:
+                    ee_cert = is_valid_cert(data[ip]['certificates'], ccadb_hashes, snapshot_timestamp)
+                    if ee_cert is not None:
+                        fileToWrite.write("{}\n".format(json.dumps({ ip : ee_cert })))
     fileToWrite.close()
 
 
@@ -132,10 +154,11 @@ if __name__ == '__main__':
 
     if args.dataType == "active":
         files_l = load_active_scan_files(args.inputFolder)
-        process_active_data(files_l, ccadb_hashes, snapshot_timestamp, resultPath)
+        process_active_scan_data(files_l, ccadb_hashes, snapshot_timestamp, resultPath)
 
     elif args.dataType == "rapid7":
-        pass
+        process_rapid7_scan_data(args.inputFolder)
+
     else:
         pass
 
