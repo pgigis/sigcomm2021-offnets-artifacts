@@ -56,7 +56,7 @@ Currently, as an input we support the following two datasets:
 
 To run the script, execute the following command:
 ```
-python3 extract_valid_certs.py -d 21-11-2019 -t active -i ../datasets/certificates/active/
+python3 extract_valid_certs.py -d 21-11-2019 -t active -i ../datasets/tls_scans/active/
 ```
 
 This will generate the folder ```active_21-11-2019``` inside the ```analysis/results```.
