@@ -86,7 +86,7 @@ Any value can be used as a ```"hypergiant-keyword"```. For the ```"hypergiant-as
 
 To run the script, execute the following command:
 ```
-python3 extract_hypergiant_on-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json  -i results/active_21-11-2019/ee_certs.txt  -c config.json -a ../datasets/ip_to_as/2019_11_25thres_db.json
+python3 extract_hypergiant_on-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json  -i results/active_21-11-2019/ee_certs.txt  -c configs/config.txt -a ../datasets/ip_to_as/2019_11_25thres_db.json
 ```
 
 This will create a folder ```"on-nets"``` inside ```"analysis/results/active_21-11-2019/"```. The folder contains a file per HG keyword. Each file includes only the ```dns_names``` and ```subject:organization``` fields of the EE certificates found in IP addresses of the HG AS(es) using this specific keyword. 
