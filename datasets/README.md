@@ -66,7 +66,7 @@ You can find our custom Certigo version [here](https://github.com/pgigis/certigo
 
 To run the tool, execute the following command:
 ```
-certigo dump -j -f PEM -w <INPUT-FILE> -k <OUTPUT-FOLDER>
+./certigo dump -j -f PEM -w ../pems.txt > translated.txt
 ```
 
 This will generate a file in the following format:
