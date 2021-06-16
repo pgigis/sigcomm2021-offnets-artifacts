@@ -105,7 +105,7 @@ Script ```extract_hypergiant_off-net_certs.py``` takes as an input the generated
 
 To run the script, execute the following command:
 ```
-python3 extract_hypergiant_off-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json -i results/active_21-11-2019/ee_certs.txt -c config.txt -a ../datasets/ip_to_as/2019_11_25thres_db.json -o results/active_21-11-2019/on-nets
+python3 extract_hypergiant_off-net_certs.py -s ../datasets/hypergiants/2019_11_hypergiants_asns.json -i results/active_21-11-2019/ee_certs.txt -c configs/config.txt -a ../datasets/ip_to_as/2019_11_25thres_db.json -o results/active_21-11-2019/on-nets
 ```
 
 This will create a folder ```"candidate_off-nets"``` inside ```"analysis/results/active_21-11-2019/"```. The folder contains a file per HG keyword. Each file includes only the ```dns_names``` and ```subject:organization``` fields of the EE certificates found in IP addresses outside of the HG AS(es) using this specific keyword. 
