@@ -10,6 +10,7 @@
 # Format:
 #network,header_name,header_value
 Akamai,Server,AkamaiGhost
+Akamai,Server,Ghost
 Akamai,Server,AkamaiNetStorage
 Alibaba,server,tengine*
 Alibaba,Eagleid,
