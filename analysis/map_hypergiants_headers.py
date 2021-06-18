@@ -95,7 +95,7 @@ def get_header_filters():
     value_substr = {}
     name_substr = {}
 
-    with open('/home/extra_disk/repos/cdnheaders/hypergiant-headers.txt', 'r') as f:
+    with open('configs/hypergiant-headers.txt', 'r') as f:
         for line in f:
             line = line.strip()
 
