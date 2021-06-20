@@ -1,23 +1,12 @@
 # _"Seven Years in the Life of Hypergiants' Off-Nets"_
 ## ACM SIGCOMM 2021 Artifacts
 Table of Contents
-* [Result Workflow](#result-workflow)
 * [Getting Started](#getting-started)
     * [Prerequisites and Installation](#prerequisites-and-installation)
     * [Getting Acccess to the Datasets](#getting-acccess-to-the-datasets)
+* [Result Overview](#result-overview)
 * [Analysis](#analysis)
 * [Meta-Analysis](#meta-analysis)
-
-
-## Results Workflow
-
-The [Analysis](#analysis) step allows you to infer the off-nets per hypergiant by reproducing the methodology section of the paper.
-
-Then, to explore the results we provide additional [Meta-Analysis](#meta-analysis) scripts. 
-
-Meta-Analysis ```Estimate Hypergiant country coverage``` allows you to reproduce the Internet user population coverage (percentage) per country for off-net footprints results used in Figures 6, 7 and 8.
-
-Meta-Analysis ```Group Hypergiant validated off-nets by continent``` allows you to reproduce the results used in Figure 5.
 
 
 ## Getting Started
@@ -45,6 +34,18 @@ In case a required dependency is missing, please contact [p.gkigkis at cs.ucl.ac
 Our methodology uses TLS certificate scans as a building block, supplementing them with additional techniques (e.g., HTTP(S) fingerprints) and datasets (e.g., IP-to-AS mapping, APNIC user population estimates, etc..). 
 
 We document in detail the datasets [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/tree/master/datasets).
+
+
+
+## Results Overview
+
+The [Analysis](#analysis) step allows you to infer the off-nets per hypergiant by reproducing the methodology section of the paper.
+
+Then, to explore the results we provide additional [Meta-Analysis](#meta-analysis) scripts. 
+
+Meta-Analysis ```Group Hypergiant validated off-nets by continent``` allows you to reproduce the results used in Figure 5.
+
+Meta-Analysis ```Estimate Hypergiant country coverage``` allows you to reproduce the Internet user population coverage (percentage) per country for off-net footprints results used in Figures 6, 7 and 8.
 
 
 ## Analysis
@@ -196,7 +197,7 @@ Here is the JSON format of each file:
 
 ## Meta-Analysis
 
-### **Explore results**
+### **Exploring results**
 
 The ```explore_results.py``` script outputs the inferred off-nets per hypergiant at AS-level granularity. The script takes as input the result folder of the analysis part.
 
@@ -218,9 +219,7 @@ Found Off-nets (validated with HTTP(s) headers) in 0 ASes.
 -------------------------------------------------------------------
 ```
 
-You can also get a list of the ASes per hypergiant, using the argument ```-p true```.
-
-Execute the following command:
+You can also get a list of the ASes per hypergiant, using the argument ```-p true```, by executing the following command:
 ```
 python3 explore_results.py  -i ../analysis/results/active_21-11-2019/ -p true
 ```
@@ -247,34 +246,8 @@ ASes for Validated Off-nets:
 -------------------------------------------------------------------
 ```
 
-
-### **Estimate Hypergiant country coverage**
-The ```country_coverage.py``` script takes as input the result folder of the analysis part (uses the validated off-nets) and the APNIC user population per ASN estimates.
-
-Execute the following command:
-```
-python3 country_coverage.py -i ../analysis/results/active_21-11-2019 -a ../datasets/apnic_population_estimates/2019_11.json
-```
-
-The script creates ```results/active_21-11-2019/country_coverage``` inside the meta-analysis folder. For each hypergiant it creates a text file formatted as follows:
-
-```
-Country-Alpha‑2-code,Coverage-Percentage 
-```
-
-Here is an output example.
-```
-BD,82.89108306883769
-BE,54.36254335595898
-BF,86.31532375598584
-BG,62.11203725552794
-BA,80.72960244254675
-BB,98.43826732090602
-```
-
-
 ### **Group Hypergiant validated off-nets by continent**
-The ```group_by_continent.py``` script takes as input the result folder of the analysis part (uses the validated off-nets) and the CAIDA AS-to-Organization info dataset. To obtain the latter dataset please refer [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/tree/master/datasets).
+The ```group_by_continent.py``` script takes as input the result folder of the analysis part (uses the validated off-nets) and the CAIDA AS-to-Organization info dataset. To obtain the latter dataset refer [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/tree/master/datasets).
 
 
 Execute the following command:
@@ -306,3 +279,29 @@ NA: AS26133, AS600, AS53435, AS36728, AS19165, ...
 OC: AS132797, AS18200, AS10131, AS9790, AS133612, ... 
 - - - 
 ```
+
+
+### **Estimate Hypergiant country coverage**
+The ```country_coverage.py``` script takes as input the result folder of the analysis part (uses the validated off-nets) and the APNIC user population per ASN estimates.
+
+Execute the following command:
+```
+python3 country_coverage.py -i ../analysis/results/active_21-11-2019 -a ../datasets/apnic_population_estimates/2019_11.json
+```
+
+The script creates ```results/active_21-11-2019/country_coverage``` inside the meta-analysis folder. For each hypergiant it creates a text file formatted as follows:
+
+```
+Country-Alpha‑2-code,Coverage-Percentage 
+```
+
+Here is an output example.
+```
+BD,82.89108306883769
+BE,54.36254335595898
+BF,86.31532375598584
+BG,62.11203725552794
+BA,80.72960244254675
+BB,98.43826732090602
+```
+
