@@ -9,7 +9,7 @@ Table of Contents
 * [Meta-Analysis](#meta-analysis)
 
 
-## Result Workflow
+## Results Workflow
 
 The [Analysis](#analysis) step allows you to infer the off-nets per hypergiant by reproducing the methodology section of the paper.
 
@@ -227,7 +227,6 @@ python3 explore_results.py  -i ../analysis/results/active_21-11-2019/ -p true
 
 Here is an output example. 
 ```
-
 HG Keyword: 'alibaba'
 Found Candidate Off-nets (only certificates) in 300 ASes.
 Found Off-nets (validated with HTTP(s) headers) in 154 ASes.
@@ -245,9 +244,7 @@ ASes for Candidate Off-nets:
 AS4609, AS6147, AS8708, AS55818, AS13335, AS15897, AS19994, ...
 - - -
 ASes for Validated Off-nets:
-
 -------------------------------------------------------------------
-
 ```
 
 
@@ -308,5 +305,4 @@ NA: AS26133, AS600, AS53435, AS36728, AS19165, ...
 - - - 
 OC: AS132797, AS18200, AS10131, AS9790, AS133612, ... 
 - - - 
-
 ```
