@@ -1,11 +1,23 @@
 # _"Seven Years in the Life of Hypergiants' Off-Nets"_
 ## ACM SIGCOMM 2021 Artifacts
 Table of Contents
+* [Result Workflow](#result-workflow)
 * [Getting Started](#getting-started)
     * [Prerequisites and Installation](#prerequisites-and-installation)
     * [Getting Acccess to the Datasets](#getting-acccess-to-the-datasets)
 * [Analysis](#analysis)
 * [Meta-Analysis](#meta-analysis)
+
+
+## Result Workflow
+
+The [Analysis](#analysis) step allows you to infer the off-nets per hypergiant by reproducing the methodology section of the paper.
+
+Then, to explore the results we provide additional [Meta-Analysis](#meta-analysis) scripts. 
+
+Meta-Analysis ```Estimate Hypergiant country coverage``` allows you to reproduce the Internet user population coverage (percentage) per country for off-net footprints results used in Figures 6, 7 and 8.
+
+Meta-Analysis ```Group Hypergiant validated off-nets by continent``` allows you to reproduce the results used in Figure 5.
 
 
 ## Getting Started
