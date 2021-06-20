@@ -4,7 +4,7 @@ Table of Contents
 * [Getting Started](#getting-started)
     * [Prerequisites and Installation](#prerequisites-and-installation)
     * [Getting Acccess to the Datasets](#getting-acccess-to-the-datasets)
-* [Result Overview](#result-overview)
+* [Results Overview](#results-overview)
 * [Analysis](#analysis)
 * [Meta-Analysis](#meta-analysis)
 
