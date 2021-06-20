@@ -116,3 +116,11 @@ APNIC conducts measurement campaigns and publishes the related results on a dail
 ## Hypergiant ASes
 The hypergiant ASes across time can be found in ```hypergiants``` folder.
 
+
+## AS-to-Organization info
+This dataset is provided by [CAIDA](https://www.caida.org).
+You can download the datasets [here](https://publicdata.caida.org/datasets/as-organizations/).
+
+You need to download only files ending with ".as-org2info.txt.gz".
+
+

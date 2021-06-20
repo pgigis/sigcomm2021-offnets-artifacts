@@ -5,6 +5,7 @@ Table of Contents
     * [Prerequisites and Installation](#prerequisites-and-installation)
     * [Getting Acccess to the Datasets](#getting-acccess-to-the-datasets)
 * [Analysis](#analysis)
+* [Meta-Analysis](#meta-analysis)
 
 
 ## Getting Started
@@ -162,6 +163,9 @@ Here is an output example.
 52.7.82.238     Amazon  server:awselb/2.0
 ```
 
+Note: For each snapshot you need to download only the corresponding HTTP and HTTPs header files with the alligned dates from Rapid7.
+
+
 ### **Step 5**: Compare candidate off-nets with HTTP(S) fingerprints.
 The ```find_offnets.py``` script takes as an input the candidate off-nets folder of Step 3, and the HTTP(S) header fingerprints of Step 4.
 
@@ -178,5 +182,119 @@ Here is the JSON format of each file:
 ```
 
 
+## Meta-Analysis
+
+### **Explore results**
+
+The ```explore_results.py``` script outputs the inferred off-nets per hypergiant at AS-level granularity. The script takes as input the result folder of the analysis part.
+
+Execute the following command:
+```
+python3 explore_results.py  -i ../analysis/results/active_21-11-2019/
+```
+
+Here is an output example. 
+```
+HG Keyword: 'akamai'
+Found Candidate Off-nets (only certificates) in 1228 ASes.
+Found Off-nets (validated with HTTP(s) headers) in 1187 ASes.
+-------------------------------------------------------------------
+
+HG Keyword: 'disney'
+Found Candidate Off-nets (only certificates) in 194 ASes.
+Found Off-nets (validated with HTTP(s) headers) in 0 ASes.
+-------------------------------------------------------------------
+```
+
+You can also get a list of the ASes per hypergiant, using the argument ```-p true```.
+
+Execute the following command:
+```
+python3 explore_results.py  -i ../analysis/results/active_21-11-2019/ -p true
+```
+
+Here is an output example. 
+```
+
+HG Keyword: 'alibaba'
+Found Candidate Off-nets (only certificates) in 300 ASes.
+Found Off-nets (validated with HTTP(s) headers) in 154 ASes.
+ASes for Candidate Off-nets:
+AS136192, AS136193, AS4609, AS136195, AS6147, AS20485, AS45061, ...
+- - -
+ASes for Validated Off-nets:
+AS577, AS17897, AS136188, AS9394, AS54994, AS131565, AS58519, AS134771, ...
+-------------------------------------------------------------------
+
+HG Keyword: 'disney'
+Found Candidate Off-nets (only certificates) in 194 ASes.
+Found Off-nets (validated with HTTP(s) headers) in 0 ASes.
+ASes for Candidate Off-nets:
+AS4609, AS6147, AS8708, AS55818, AS13335, AS15897, AS19994, ...
+- - -
+ASes for Validated Off-nets:
+
+-------------------------------------------------------------------
+
+```
 
 
+### **Estimate Hypergiant country coverage**
+The ```country_coverage.py``` script takes as input the result folder of the analysis part (uses the validated off-nets) and the APNIC user population per ASN estimates.
+
+Execute the following command:
+```
+python3 country_coverage.py -i ../analysis/results/active_21-11-2019 -a ../datasets/apnic_population_estimates/2019_11.json
+```
+
+The script creates ```results/active_21-11-2019/country_coverage``` inside the meta-analysis folder. For each hypergiant it creates a text file formatted as follows:
+
+```
+Country-Alpha‑2-code,Coverage-Percentage 
+```
+
+Here is an output example.
+```
+BD,82.89108306883769
+BE,54.36254335595898
+BF,86.31532375598584
+BG,62.11203725552794
+BA,80.72960244254675
+BB,98.43826732090602
+```
+
+
+### **Group Hypergiant validated off-nets by continent**
+The ```group_by_continent.py``` script takes as input the result folder of the analysis part (uses the validated off-nets) and the CAIDA AS-to-Organization info dataset. To obtain the latter dataset please refer [here](https://github.com/pgigis/sigcomm2021-offnets-artifacts/tree/master/datasets).
+
+
+Execute the following command:
+```
+python3 group_by_continent.py -i ../analysis/results/active_21-11-2019 -c ../datasets/organization_info/20191101.as-org2info.txt
+```
+
+The script creates ```results/active_21-11-2019/offnets_to_continents``` inside the meta-analysis folder. For each hypergiant it creates a text file formatted as follows:
+
+Here is an output example for ```google```.
+```
+EU: 793 ASes
+AF: 166 ASes
+SA: 874 ASes
+AS: 778 ASes
+NA: 403 ASes
+OC: 51 ASes
+# # #
+EU: AS34058, AS41794, AS5550, AS34187, AS8218, ...
+- - - 
+AF: AS10474, AS36992, AS24835, AS327818, AS37612, ...
+- - - 
+SA: AS266445, AS23140, AS262676, AS262634, AS263244, ...
+- - - 
+AS: AS133830, AS135772, AS15802, AS132735, AS45271, ...
+- - - 
+NA: AS26133, AS600, AS53435, AS36728, AS19165, ... 
+- - - 
+OC: AS132797, AS18200, AS10131, AS9790, AS133612, ... 
+- - - 
+
+```
